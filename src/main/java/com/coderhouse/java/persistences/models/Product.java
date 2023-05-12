@@ -4,7 +4,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
 @Entity
-@Table(indexes = @Index(columnList = "code"))
 public class Product {
 
     @Id
@@ -70,4 +69,5 @@ public class Product {
     public Long getId() {
         return id;
     }
+
 }

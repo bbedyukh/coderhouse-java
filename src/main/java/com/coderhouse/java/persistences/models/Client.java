@@ -20,8 +20,11 @@ public class Client {
     private String lastName;
 
     @Nonnull
-    @Column(length = 11)
+    @Column(unique = true, length = 11)
     private String dni;
+
+//    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+//    private List<Invoice> invoice;
 
     public Client() {
     }
@@ -63,4 +66,12 @@ public class Client {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+//    public List<Invoice> getInvoice() {
+//        return invoice;
+//    }
+//
+//    public void setInvoice(List<Invoice> invoice) {
+//        this.invoice = invoice;
+//    }
 }
