@@ -3,6 +3,8 @@ package com.coderhouse.java.persistences.models;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(indexes = @Index(columnList = "dni"))
 public class Client {
@@ -64,6 +66,24 @@ public class Client {
     }
 
     public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public boolean hasFirstName() {
+        return firstName != null;
+    }
+
+    public boolean hasLastName() {
+        return lastName != null;
+    }
+
+    public boolean hasDNI() {
+        return dni != null;
+    }
+
+    public void updateWith(String firstName, String lastName, String dni) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dni = dni;
     }
 

@@ -3,5 +3,8 @@ package com.coderhouse.java.persistences.repositories;
 import com.coderhouse.java.persistences.models.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+import java.util.Optional;
+
+public interface ClientRepository extends JpaRepository<Client, Long> {
+    Optional<Client> findByDni(String dni);
 }

@@ -57,4 +57,7 @@ public class Invoice {
         this.client = client;
     }
 
+    public boolean hasClient() {
+        return client != null;
+    }
 }
