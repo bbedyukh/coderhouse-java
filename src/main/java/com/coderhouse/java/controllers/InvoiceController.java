@@ -1,5 +1,6 @@
 package com.coderhouse.java.controllers;
 
+import com.coderhouse.java.dto.InvoiceDTO;
 import com.coderhouse.java.dto.ResponseHandler;
 import com.coderhouse.java.middlewares.ApiException;
 import com.coderhouse.java.persistences.models.Invoice;
@@ -24,19 +25,19 @@ public class InvoiceController {
         } catch (ApiException apiException) {
             return ResponseHandler.generate(apiException.getMessage(), apiException.getHttpStatus());
         } catch (Exception e) {
-            return ResponseHandler.generate("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseHandler.generate("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody Invoice body) {
+    public ResponseEntity<Object> create(@RequestBody InvoiceDTO body) {
         try {
             Invoice invoice = invoiceService.createOne(body);
             return new ResponseEntity<>(invoice, HttpStatus.CREATED);
         } catch (ApiException apiException) {
             return ResponseHandler.generate(apiException.getMessage(), apiException.getHttpStatus());
         } catch (Exception e) {
-            return ResponseHandler.generate("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseHandler.generate("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

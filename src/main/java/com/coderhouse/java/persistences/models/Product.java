@@ -13,8 +13,8 @@ public class Product {
     @Column(length = 150)
     private String name;
 
-    private double price;
-    private int stock;
+    private Double price;
+    private Integer stock;
 
     @Nonnull
     @Column(unique = true, length = 50)
@@ -23,14 +23,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String code, double price, int stock) {
+    public Product(String name, String code, Double price, Integer stock) {
         this.name = name;
         this.code = code;
         this.price = price;
         this.stock = stock;
     }
 
-    public static Product createWith(String name, String code, double price, int stock) {
+    public static Product createWith(String name, String code, Double price, Integer stock) {
         return new Product(name, code, price, stock);
     }
 
@@ -70,4 +70,26 @@ public class Product {
         return id;
     }
 
+    public void updateWith(String name, String code, Double price, Integer stock) {
+        this.name = name;
+        this.code = code;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public boolean hasName() {
+        return name != null;
+    }
+
+    public boolean hasCode() {
+        return code != null;
+    }
+
+    public boolean hasPrice() {
+        return price != null;
+    }
+
+    public boolean hasStock() {
+        return stock != null;
+    }
 }

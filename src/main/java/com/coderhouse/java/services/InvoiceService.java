@@ -1,6 +1,8 @@
 package com.coderhouse.java.services;
 
+import com.coderhouse.java.dto.InvoiceDTO;
 import com.coderhouse.java.middlewares.ApiException;
+import com.coderhouse.java.persistences.models.Client;
 import com.coderhouse.java.persistences.models.Invoice;
 import com.coderhouse.java.persistences.repositories.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class InvoiceService {
 
     @Autowired
     private InvoiceRepository invoiceRepository;
+    @Autowired
+    private ClientService clientService;
 
     public Invoice getOne(Long invoiceId) {
         return findInvoiceOrFail(invoiceId);
@@ -22,12 +26,17 @@ public class InvoiceService {
         return invoiceRepository.findById(invoiceId).orElseThrow(() -> new ApiException("Invoice not found", HttpStatus.NOT_FOUND));
     }
 
-    public Invoice createOne(Invoice invoice) {
-        validateProperties(invoice);
+    public Invoice createOne(InvoiceDTO invoiceDTO) {
+        validateProperties(invoiceDTO);
+
+        Client client = clientService.findClientOrFail(invoiceDTO.getClientId());
+
+        Invoice invoice = Invoice.createWith(client);
+
+        return invoiceRepository.save(invoice);
     }
 
-    private void validateProperties(Invoice invoice) {
-        if (!invoice.hasClient() || !invoice.has() || !invoice.hasDNI())
-            throw new ApiException("Properties body missing", HttpStatus.BAD_REQUEST);
+    private void validateProperties(InvoiceDTO invoiceDTO) {
+        if (invoiceDTO.hasClientId()) throw new ApiException("Properties body missing", HttpStatus.BAD_REQUEST);
     }
 }

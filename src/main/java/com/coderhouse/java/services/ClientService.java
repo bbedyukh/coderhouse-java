@@ -27,7 +27,7 @@ public class ClientService {
         return findClientOrFail(clientId);
     }
 
-    private Client findClientOrFail(Long clientId) {
+    public Client findClientOrFail(Long clientId) {
         return clientRepository.findById(clientId).orElseThrow(() -> new ApiException("Client not found", HttpStatus.NOT_FOUND));
     }
 
