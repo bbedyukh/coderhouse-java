@@ -1,22 +1,20 @@
 package com.coderhouse.java.dto;
 
-import java.util.Date;
+import java.util.*;
 
 public class InvoiceDTO {
 
-    private Long invoiceId;
-    private Long clientId;
+    private Map<String, Object> client;
+    private List<Object> products;
     private Date createdAt;
     private double total;
 
-    public InvoiceDTO(Long invoiceId, Date createdAt, double total) {
-        this.invoiceId = invoiceId;
-        this.createdAt = createdAt;
-        this.total = total;
+    public Map<String, Object> getClient() {
+        return client;
     }
 
-    public Long getInvoiceId() {
-        return invoiceId;
+    public List<Object> getProducts() {
+        return products;
     }
 
     public Date getCreatedAt() {
@@ -25,13 +23,5 @@ public class InvoiceDTO {
 
     public double getTotal() {
         return total;
-    }
-
-    public boolean hasClientId() {
-        return clientId != null;
-    }
-
-    public Long getClientId() {
-        return clientId;
     }
 }

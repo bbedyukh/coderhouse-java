@@ -27,16 +27,17 @@ public class InvoiceService {
     }
 
     public Invoice createOne(InvoiceDTO invoiceDTO) {
-        validateProperties(invoiceDTO);
-
-        Client client = clientService.findClientOrFail(invoiceDTO.getClientId());
-
-        Invoice invoice = Invoice.createWith(client);
-
-        return invoiceRepository.save(invoice);
+//        validateProperties(invoiceDTO);
+//
+//        Client client = clientService.findClientOrFail(invoiceDTO.getClientId());
+//
+//        Invoice invoice = Invoice.createWith(client);
+//
+//        return invoiceRepository.save(invoice);
+        return null;
     }
 
     private void validateProperties(InvoiceDTO invoiceDTO) {
-        if (invoiceDTO.hasClientId()) throw new ApiException("Properties body missing", HttpStatus.BAD_REQUEST);
+//        if (invoiceDTO.hasClientId()) throw new ApiException("Properties body missing", HttpStatus.BAD_REQUEST);
     }
 }
