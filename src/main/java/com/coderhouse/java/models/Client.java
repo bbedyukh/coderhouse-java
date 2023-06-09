@@ -1,9 +1,7 @@
-package com.coderhouse.java.persistences.models;
+package com.coderhouse.java.models;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(indexes = @Index(columnList = "dni"))
@@ -23,21 +21,18 @@ public class Client {
 
     @Nonnull
     @Column(unique = true, length = 11)
-    private String dni;
-
-//    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-//    private List<Invoice> invoice;
+    private Integer dni;
 
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String dni) {
+    public Client(String firstName, String lastName, Integer dni) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dni = dni;
     }
 
-    public static Client createWith(String firstName, String lastName, String dni) {
+    public static Client createWith(String firstName, String lastName, Integer dni) {
         return new Client(firstName, lastName, dni);
     }
 
@@ -49,24 +44,13 @@ public class Client {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDni() {
+    public Integer getDni() {
         return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
     }
 
     public boolean hasFirstName() {
@@ -81,17 +65,10 @@ public class Client {
         return dni != null;
     }
 
-    public void updateWith(String firstName, String lastName, String dni) {
+    public void updateWith(String firstName, String lastName, Integer dni) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dni = dni;
     }
 
-//    public List<Invoice> getInvoice() {
-//        return invoice;
-//    }
-//
-//    public void setInvoice(List<Invoice> invoice) {
-//        this.invoice = invoice;
-//    }
 }

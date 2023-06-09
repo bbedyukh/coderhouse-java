@@ -1,10 +1,10 @@
-package com.coderhouse.java.persistences.repositories;
+package com.coderhouse.java.repositories;
 
-import com.coderhouse.java.persistences.models.Client;
+import com.coderhouse.java.models.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    Optional<Client> findByDni(String dni);
+    Optional<Client> findByDni(Integer dni);
 }

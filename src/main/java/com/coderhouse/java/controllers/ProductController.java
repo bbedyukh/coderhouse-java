@@ -1,8 +1,8 @@
 package com.coderhouse.java.controllers;
 
-import com.coderhouse.java.dto.ResponseHandler;
+import com.coderhouse.java.middlewares.ResponseHandler;
 import com.coderhouse.java.middlewares.ApiException;
-import com.coderhouse.java.persistences.models.Product;
+import com.coderhouse.java.models.Product;
 import com.coderhouse.java.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

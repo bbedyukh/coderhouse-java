@@ -1,14 +1,18 @@
 package com.coderhouse.java.services;
 
+import com.coderhouse.java.dto.DetailsDTO;
+import com.coderhouse.java.dto.InvoiceResponseDTO;
 import com.coderhouse.java.middlewares.ApiException;
-import com.coderhouse.java.persistences.models.Client;
-import com.coderhouse.java.persistences.models.Invoice;
-import com.coderhouse.java.persistences.repositories.ClientRepository;
-import com.coderhouse.java.persistences.repositories.InvoiceRepository;
+import com.coderhouse.java.models.Client;
+import com.coderhouse.java.models.Invoice;
+import com.coderhouse.java.repositories.ClientRepository;
+import com.coderhouse.java.repositories.InvoiceDetailRepository;
+import com.coderhouse.java.repositories.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,8 +20,12 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
     @Autowired
     private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private InvoiceDetailRepository invoiceDetailRepository;
 
     public List<Client> getAll() {
         return clientRepository.findAll();
@@ -28,11 +36,11 @@ public class ClientService {
     }
 
     public Client findClientOrFail(Long clientId) {
-        return clientRepository.findById(clientId).orElseThrow(() -> new ApiException("Client not found", HttpStatus.NOT_FOUND));
+        return clientRepository.findById(clientId).orElseThrow(() -> new ApiException("Client #" + clientId + " not found", HttpStatus.NOT_FOUND));
     }
 
     public Client createOne(Client client) {
-        validateProperties(client);
+        assertRequest(client);
         checkIfClientExists(client);
         Client instance = Client.createWith(client.getFirstName(), client.getLastName(), client.getDni());
         return clientRepository.save(instance);
@@ -43,15 +51,14 @@ public class ClientService {
         if (exists) throw new ApiException("Client already exists", HttpStatus.BAD_REQUEST);
     }
 
-
     public Client updateOne(Client client, Long clientId) {
-        validateProperties(client);
+        assertRequest(client);
         Client instance = findClientOrFail(clientId);
         instance.updateWith(client.getFirstName(), client.getLastName(), client.getDni());
         return clientRepository.save(instance);
     }
 
-    private static void validateProperties(Client client) {
+    private static void assertRequest(Client client) {
         if (!client.hasFirstName() || !client.hasLastName() || !client.hasDNI())
             throw new ApiException("Properties body missing", HttpStatus.BAD_REQUEST);
     }
@@ -61,8 +68,23 @@ public class ClientService {
         clientRepository.delete(client);
     }
 
-    public List<Invoice> getInvoices(Long clientId) {
+    public List<InvoiceResponseDTO> getInvoices(Long clientId) {
         Client client = findClientOrFail(clientId);
-        return invoiceRepository.findAllByClientId(client.getId());
+        List<InvoiceResponseDTO> invoiceResponse = new ArrayList<>();
+
+        List<Invoice> invoices = invoiceRepository.findAllByClientId(client.getId());
+
+        invoices.forEach(invoice -> {
+
+            List<DetailsDTO> details = invoiceDetailRepository.findAllByInvoiceId(invoice.getId())
+                    .stream()
+                    .map(invoiceDetail -> new DetailsDTO(invoiceDetail.getProduct().getTitle(), invoiceDetail.getProduct().getDescription(), invoiceDetail.getProduct().getSku(), invoiceDetail.getPrice(), invoiceDetail.getQuantity()))
+                    .toList();
+
+            invoiceResponse.add(new InvoiceResponseDTO(invoice.getId(), invoice.getClient().getId(), invoice.getCreatedAt(), invoice.getTotal(), details));
+
+        });
+
+        return invoiceResponse;
     }
 }

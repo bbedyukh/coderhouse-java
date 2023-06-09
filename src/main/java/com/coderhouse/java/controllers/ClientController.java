@@ -1,9 +1,9 @@
 package com.coderhouse.java.controllers;
 
-import com.coderhouse.java.dto.ResponseHandler;
+import com.coderhouse.java.dto.InvoiceResponseDTO;
+import com.coderhouse.java.middlewares.ResponseHandler;
 import com.coderhouse.java.middlewares.ApiException;
-import com.coderhouse.java.persistences.models.Client;
-import com.coderhouse.java.persistences.models.Invoice;
+import com.coderhouse.java.models.Client;
 import com.coderhouse.java.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,7 +80,7 @@ public class ClientController {
     @GetMapping("/{id}/invoices")
     public ResponseEntity<Object> getInvoices(@PathVariable Long id) {
         try {
-            List<Invoice> invoices = clientService.getInvoices(id);
+            List<InvoiceResponseDTO> invoices = clientService.getInvoices(id);
             return new ResponseEntity<>(invoices, HttpStatus.OK);
         } catch (ApiException apiException) {
             return ResponseHandler.generate(apiException.getMessage(), apiException.getHttpStatus());

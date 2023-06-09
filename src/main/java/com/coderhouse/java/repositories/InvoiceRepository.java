@@ -1,6 +1,6 @@
-package com.coderhouse.java.persistences.repositories;
+package com.coderhouse.java.repositories;
 
-import com.coderhouse.java.persistences.models.Invoice;
+import com.coderhouse.java.models.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.coderhouse.java.dto;
+package com.coderhouse.java.middlewares;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

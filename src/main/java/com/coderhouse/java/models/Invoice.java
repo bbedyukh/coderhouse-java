@@ -1,4 +1,4 @@
-package com.coderhouse.java.persistences.models;
+package com.coderhouse.java.models;
 
 import jakarta.persistence.*;
 
@@ -45,19 +45,8 @@ public class Invoice {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Client getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public boolean hasClient() {
-        return client != null;
-    }
 }
