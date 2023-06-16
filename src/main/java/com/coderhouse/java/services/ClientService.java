@@ -42,7 +42,7 @@ public class ClientService {
     public Client createOne(Client client) {
         assertRequest(client);
         checkIfClientExists(client);
-        Client instance = Client.createWith(client.getFirstName(), client.getLastName(), client.getDni());
+        Client instance = Client.createWith(client.getFirstname(), client.getLastname(), client.getDni());
         return clientRepository.save(instance);
     }
 
@@ -54,7 +54,7 @@ public class ClientService {
     public Client updateOne(Client client, Long clientId) {
         assertRequest(client);
         Client instance = findClientOrFail(clientId);
-        instance.updateWith(client.getFirstName(), client.getLastName(), client.getDni());
+        instance.updateWith(client.getFirstname(), client.getLastname(), client.getDni());
         return clientRepository.save(instance);
     }
 

@@ -13,11 +13,11 @@ public class Client {
 
     @Nonnull
     @Column(length = 75)
-    private String firstName;
+    private String firstname;
 
     @Nonnull
     @Column(length = 75)
-    private String lastName;
+    private String lastname;
 
     @Nonnull
     @Column(unique = true, length = 11)
@@ -26,27 +26,27 @@ public class Client {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, Integer dni) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Client(String firstname, String lastname, Integer dni) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.dni = dni;
     }
 
-    public static Client createWith(String firstName, String lastName, Integer dni) {
-        return new Client(firstName, lastName, dni);
+    public static Client createWith(String firstname, String lastname, Integer dni) {
+        return new Client(firstname, lastname, dni);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
     public Integer getDni() {
@@ -54,20 +54,20 @@ public class Client {
     }
 
     public boolean hasFirstName() {
-        return firstName != null;
+        return firstname != null;
     }
 
     public boolean hasLastName() {
-        return lastName != null;
+        return lastname != null;
     }
 
     public boolean hasDNI() {
         return dni != null;
     }
 
-    public void updateWith(String firstName, String lastName, Integer dni) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void updateWith(String firstname, String lastname, Integer dni) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.dni = dni;
     }
 

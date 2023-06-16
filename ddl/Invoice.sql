@@ -1,0 +1,7 @@
+CREATE TABLE invoice (
+  	id INT AUTO_INCREMENT NOT NULL,
+	created_at DATETIME NOT NULL,
+	total FLOAT NOT NULL,
+	client_id INT NOT NULL,
+  	PRIMARY KEY (id)
+);

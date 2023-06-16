@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coderhouse</groupId>
-	<artifactId>java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>java</name>
+	<artifactId>coderhouse</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>coderhouse</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
